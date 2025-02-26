@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['editor-jwswe-5.devedu.io', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
 
+    'rest_framework',
     'bookings',
     'django.contrib.admin',
     'django.contrib.auth',
