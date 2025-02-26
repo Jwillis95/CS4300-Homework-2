@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Listings</title>
+</head>
+
+<body>
+    <h1>Movies</h1>
+    <u1>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.title }}</strong> - {{ movie.release_date }}<br>
+                <p>{{ movie.description }}</p>
+                <a href=""{% url 'seat_booking' movie.id %}">Book a Seat</a>
+            </li>
+        {% empty %}
+            <p> No movies available</p>
+        {% endfor %}
+    </u1>
+</body>
+</html>
