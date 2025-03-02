@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content "width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <h1>Book a seat for {{ movie.title }}</h1>
+{% extends 'bookings/base.html' %}
+
+{% block title %} Book a Seat {% endblock %}
+
+{% block content %}
+    <h2>Book a Seat for {{ movie.title }}</h2>
     <form method="POST">
-        {% srfc_token %}
-        <u1>
-            {% for seat in seats %}
-            <li>
-                <input type="radio" name="seat" value="{{ seat.id }}" {% if seat.booked %}disabled{% endif %}>
-                {{ seat.seat_number }} {% if seat.booked %} - Booked{% else %} - <Available>% endif %</Available>
-            </li>
-            {% endfor %}
-        </u1>
-        <button type="submit">Confirm Booking</button>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="seat">Select Seat:</label>
+            <select id="seat" name="seat" class="form-control">
+                {% for seat in seats %}
+                    <option value="{{ seat.id }}">{{ seat.number }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Book Seat</button>
     </form>
-</body>
-
-
-</html>
+{% endblock %}

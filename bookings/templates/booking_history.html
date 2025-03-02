@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking History</title>
-</head>
-<body>
-    <h1>Your Booking History</h1>
-    <u1>
-        {% for booking in bookings %}
-        <li>
-            <strong>Movie: {{ booking.movie.title }}</strong>
-            Seat Number: {{booking.set.seat_number }} <br>
-            Booking Date: {{ booking.booking_date }}
-        </li>
-        {% empty %}
-        <p>No bookings found</p>
-    </u1>
-</body>
-</html>
+<!-- templates/booking_history.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Booking History{% endblock %}
+
+{% block content %}
+  <h2>Booking History</h2>
+  <ul>
+    {% for booking in bookings %}
+      <li>{{ booking.movie.title }} - Seat: {{ booking.seat.seat_number }} - Date: {{ booking.booking_date }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
