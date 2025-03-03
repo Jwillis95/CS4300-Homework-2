@@ -1,14 +1,14 @@
-<!-- templates/movie_list.html -->
-
 {% extends 'base.html' %}
 
-{% block title %}Movies{% endblock %}
-
 {% block content %}
-  <h2>Movies List</h2>
+  <h1>Movies</h1>
   <ul>
-    {% for movie in movies %}
-      <li>{{ movie.title }} - {{ movie.release_date }}</li>
+    {% for data in movie_data %}
+      <li>
+        {{ data.movie.title }} - {{ data.available_seats }} seats available
+        <!-- Book a seat link -->
+        <a href="{% url 'reserve_seat' data.movie.id %}">Book a seat</a>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

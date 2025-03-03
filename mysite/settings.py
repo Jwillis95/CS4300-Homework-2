@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['editor-jwswe-5.devedu.io', '127.0.0.1', 'localhost']
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
 
 # Application definition
 
@@ -61,7 +64,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
         ],
-        'APP_DIRS': True,
+        'APP_DIRS': True,  # This must be True to look for app templates
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -72,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -127,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://editor-jwswe-5.devedu.io',  # Add your external domain here
+]

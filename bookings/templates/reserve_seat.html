@@ -1,0 +1,8 @@
+<h1>Reserve a Seat for {{ movie.title }}</h1>
+
+<p>{{ movie.available_seats }} seats available.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Reserve a Seat</button>
+</form>
