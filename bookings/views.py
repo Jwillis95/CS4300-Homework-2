@@ -93,9 +93,9 @@ class BookingListCreateView(generics.ListCreateAPIView):
     serializer_class = BookingSerializer
 
 class BookingHistoryView(generics.ListAPIView):
-    model = Booking
-    template_name = 'booking_history.html'
-    context_object_name = 'bookings'
-
-    def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)
+    def get(self, request, *args, **kwargs):
+        bookings = Booking.objects.filter(user=request.user)  # Get all bookings for the logged-in user
+        serializer = BookingSerializer(bookings, many=True)
+        
+        # Instead of returning the API response, render the template with the serialized data
+        return render(request, 'booking_history.html', {'bookings': serializer.data})

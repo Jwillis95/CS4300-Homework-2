@@ -12,6 +12,8 @@ class SeatSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
+    movie = serializers.CharField(source='movie.title')  # Get the title directly from the movie
+
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = ['id', 'reserved_at', 'user', 'movie', 'seat']
