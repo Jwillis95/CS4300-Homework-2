@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Movie, Seat, Booking  # Added Booking model import
+from .models import Movie, Seat, Booking 
 from rest_framework import generics
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 from .forms import UserSignupForm
@@ -14,13 +14,13 @@ def signup(request):
             user = form.save()
             user.set_password(form.cleaned_data['password'])
             user.save()
-            return redirect('login')  # Redirect to the login page after successful signup
+            return redirect('login') 
     else:
         form = UserSignupForm()
     return render(request, 'signup.html', {'form': form})
 
 def custom_404(request, exception):
-    return render(request, '404.html')  # You can create a simple 404 page
+    return render(request, '404.html') 
 
 
 @login_required
@@ -38,12 +38,12 @@ def reserve_seat(request, movie_id):
             seat.is_booked = True
             seat.save()
             
-            # Use request.user directly instead of request.user.username
+
             Booking.objects.create(movie=movie, seat=seat, user=request.user)
             movie.update_available_seats()
             
             print("Seat reserved successfully!")
-            return redirect('/')  # Redirect to home page
+            return redirect('/') 
         else:
             print("No available seats.")
     return render(request, 'reserve_seat.html', {'movie': movie, 'available_seats': available_seats})
@@ -55,14 +55,14 @@ def movie_list(request):
     movie_data = [
         {'movie': movie, 'available_seats': movie.available_seats}
         for movie in movies
-    ]  # Create a list to hold movie info and available seats
+    ] 
     
     return render(request, 'movie_list.html', {'movie_data': movie_data})
 
 
 @login_required
 def booking_history(request):
-    bookings = Booking.objects.filter(user=request.user)  # Get all bookings for the logged-in user
+    bookings = Booking.objects.filter(user=request.user) 
     return render(request, 'booking_history.html', {'bookings': bookings})
     
 @login_required
@@ -84,18 +84,18 @@ class SeatListCreateView(generics.ListCreateAPIView):
     serializer_class = SeatSerializer
 
 class SeatAvailabilityView(generics.ListAPIView):
-    queryset = Seat.objects.filter(is_booked=False)  # Correct field filtering
+    queryset = Seat.objects.filter(is_booked=False) 
     serializer_class = SeatSerializer
 
-# Define Booking-related views
+
 class BookingListCreateView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
 class BookingHistoryView(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
-        bookings = Booking.objects.filter(user=request.user)  # Get all bookings for the logged-in user
+        bookings = Booking.objects.filter(user=request.user) 
         serializer = BookingSerializer(bookings, many=True)
         
-        # Instead of returning the API response, render the template with the serialized data
+
         return render(request, 'booking_history.html', {'bookings': serializer.data})

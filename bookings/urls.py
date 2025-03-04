@@ -15,18 +15,14 @@ from .views import signup
 handler404 = 'movie_theater_booking.views.custom_404'  
 
 urlpatterns = [
-    # Authentication Routes
+
     path('signup/', views.signup, name='signup'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
-    # Traditional Views Routes (for the frontend)
-    path('', views.movie_list, name='movie_list'),  # This should be the homepage
-    path('movies/', views.movie_list, name='movie_list'),  # This is your movies listing page
+    path('', views.movie_list, name='movie_list'), 
+    path('movies/', views.movie_list, name='movie_list')
     path('reserve_seat/<int:movie_id>/', views.reserve_seat, name='reserve_seat'),
     path('booking_history/', views.BookingHistoryView.as_view(), name='booking-history'),
-
-    # API Routes
     path('api/movies/', MovieListCreateView.as_view(), name='movie-list'),
     path('api/movies/<int:pk>/', MovieDetailView.as_view(), name='movie-detail'),
     path('api/seats/', SeatListCreateView.as_view(), name='seat-list'),

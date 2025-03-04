@@ -10,11 +10,9 @@ router.register(r'seats', SeatViewSet)
 router.register(r'bookings', BookingViewSet)
 
 urlpatterns = [
-    # API Routes using viewsets (for REST API)
-    path('api/', include(router.urls)),
 
-    # Traditional Views Routes (for frontend)
-    path('signup/', views.signup, name='signup'),  # Added signup route
+    path('api/', include(router.urls)),
+    path('signup/', views.signup, name='signup'),
     path('admin/', admin.site.urls),
     path('', include('bookings.urls')),  
 ]
