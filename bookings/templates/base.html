@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Movie Theater{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ4Qf2HpFti3eE8p5J3J+k6moe5H9V9f4ENx63Y+HqOjZ6xjgjv5RdxEk6y7" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -16,7 +14,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'movie_list' %}">Movies</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'booking_history' %}">Booking History</a></li>
+                    <!-- Updated Booking History link -->
+                    <li class="nav-item"><a class="nav-link" href="{% url 'booking-history' %}">Booking History</a></li>
                 </ul>
             </div>
         </nav>

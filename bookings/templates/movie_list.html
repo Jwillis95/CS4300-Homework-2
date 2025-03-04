@@ -7,7 +7,7 @@
       <li>
         {{ data.movie.title }} - {{ data.available_seats }} seats available
         <!-- Book a seat link -->
-        <a href="{% url 'reserve_seat' data.movie.id %}">Book a seat</a>
+        <a href="/proxy/8000{% url 'reserve_seat' data.movie.id %}">Reserve a Seat</a>
       </li>
     {% endfor %}
   </ul>

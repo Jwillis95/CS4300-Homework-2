@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Booking History</h1>
-  <ul>
-    {% for booking in bookings %}
-      <li>{{ booking.movie.name }} - Seat: {{ booking.seat_number }}</li>
-    {% endfor %}
-  </ul>
+<h1>Booking History</h1>
+<ul>
+  {% for booking in bookings %}
+    <li>Reserved seat for: {{ booking.movie.title }} - Seat: {{ booking.seat.seat_number }}</li>
+  {% endfor %}
+</ul>
 {% endblock %}

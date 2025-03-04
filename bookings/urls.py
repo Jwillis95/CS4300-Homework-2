@@ -12,20 +12,21 @@ from .views import (
 )
 from .views import signup
 
+handler404 = 'movie_theater_booking.views.custom_404'  
 
 urlpatterns = [
-    # Traditional Views Routes (for the frontend)
-    path('', views.movie_list, name='movie_list'),  # Frontpage with movie list
-    path('movies/', views.movie_list, name='movie_list'),  # Optional, if you want a separate movie list page
-    path('reserve_seat/<int:movie_id>/', views.reserve_seat, name='reserve_seat'),
-    path('booking/history/', views.booking_history, name='booking_history'),
-
     # Authentication Routes
     path('signup/', views.signup, name='signup'),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
-    # API Routes using CBVs (Class-based Views)
+    # Traditional Views Routes (for the frontend)
+    path('', views.movie_list, name='movie_list'),  # This should be the homepage
+    path('movies/', views.movie_list, name='movie_list'),  # This is your movies listing page
+    path('reserve_seat/<int:movie_id>/', views.reserve_seat, name='reserve_seat'),
+    path('booking_history/', views.BookingHistoryView.as_view(), name='booking-history'),
+
+    # API Routes
     path('api/movies/', MovieListCreateView.as_view(), name='movie-list'),
     path('api/movies/<int:pk>/', MovieDetailView.as_view(), name='movie-detail'),
     path('api/seats/', SeatListCreateView.as_view(), name='seat-list'),
@@ -33,3 +34,4 @@ urlpatterns = [
     path('api/bookings/', BookingListCreateView.as_view(), name='booking-list'),
     path('api/bookings/history/', BookingHistoryView.as_view(), name='booking-history'),
 ]
+
